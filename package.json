@@ -1,0 +1,24 @@
+{
+  "name": "eleventy-rarebit-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy",
+    "newcomic": "node ./scripts/newComic.js",
+    "newgallery": "node ./scripts/newGallery.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  },
+  "dependencies": {
+    "@11ty/eleventy-img": "^7.0.0",
+    "@11ty/eleventy-plugin-rss": "^2.0.3",
+    "clean-css": "^5.3.3",
+    "sass": "^1.101.0"
+  }
+}

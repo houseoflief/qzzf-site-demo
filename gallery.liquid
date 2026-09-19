@@ -1,0 +1,55 @@
+---
+title: Gallery
+layout: layouts/page.liquid
+---
+<!--This gallery page was adapted from https://www.geeksforgeeks.org/javascript/how-to-create-responsive-modal-images-using-css-javascript/. It displays a 
+mobile responsive grid of images and opens a popup modal when an image is clicked showing the image at a larger size and displaying the name of the illustration.
+ Use this for a portfolio page, gallery of fanart, or whatever you want! -->
+<!-- I highly recommend uploading all images for your site in a webp image format to improve performance on mobile devices and slow connections. If your software
+doesn't allow you to export files in that format, you can use https://jam.dev/utilities/webp-converter or another online image converter. -->
+
+<!--Script controlling the popup modal for the gallery-->
+ <script>
+        function openModal(modalId, index) {
+            let modal = document.getElementById(modalId);
+            modal.style.display = "flex";
+            modal.classList.add("show");
+            
+        }
+        
+
+        function closeModal(modalId) {
+            let modal = document.getElementById(modalId);
+            modal.classList.remove("show");
+            setTimeout(function () {
+                modal.style.display = "none";
+            }, 300);
+        }
+    </script>
+
+<!--The gallery grid is generated using a for loop that calls all items in the gallery collection-->
+
+<div class="gallery">
+
+{% for item in collections.gallery %}
+        <img src="{{ item.data.images }}" onclick="openModal('modal{{ item.data.id }}', {{item.data.id}})" alt="{{ item.data.title }}" class="gallery-image">
+  {% endfor %}
+
+</div>
+
+
+<!--The gallery popup modal uses a for loop to generate unique modal behavior for each image in the gallery collection. --> 
+
+{% for item in collections.gallery %}
+
+   <div id="modal{{ item.data.id }}" class="modal" onclick="closeModal('modal{{ item.data.id }}')" style="display:none">
+      <span class="close">
+          &times;
+      </span>
+      <img src="{{ item.data.images }}" alt="{{ item.data.title }}" title="{{ item.data.title }}" class="modal-content" sizes="none">  
+      <div class="message"><h2>{{ item.data.title }}</h2></div>
+
+    </div>
+    
+   {% endfor %}
+

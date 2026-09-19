@@ -1,0 +1,20 @@
+{% comment %}
+If you want to remove one of the navigation buttons, just remove one of the
+`render` tags!
+{% endcomment %}
+
+{% assign next = collection | getNextCollectionItem: page %}
+<div id="comicPage" class="paperDiv">
+
+      <h1>{{ title }}</h1>
+
+  {% for panel in images %}
+    {% if next %}<a href="{{ next.url }}">{% endif %}
+      <img src="{{ panel }}" alt="{{ alt }}">
+    {% if next %}</a>{% endif %}   
+{% endfor %}
+
+<p style="text-align: center">posted on {{ date | utcDate }}</p>
+</div>
+
+{% render 'comicNav.liquid', collection: collection, page: page %}

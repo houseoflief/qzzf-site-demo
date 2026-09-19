@@ -1,0 +1,388 @@
+/**
+ * CSS is how you can add style to your website, such as colors, fonts, and
+ * positioning of your HTML content. Much of what's here is self-explanitory,
+ * but I'll give context to some of the less well-known parameters/functions.
+ */
+
+/**
+ * @import lets you break up your CSS into multiple files; I use it here to
+ * seperate the reset settings from the rest of the styles and to import the comments styles.
+ */
+
+:root {
+  --pg-width: min(64rem, 90%);
+  /* page width for double/spread pages that are one page */
+  --double-pg-width: min(84rem, 100%);
+  --bg-color: #8A3511;
+  --text-color: #8A3511;
+  --content-bg: #FFebca;
+  --footer: #FFebca;
+  --border-color: #BF742F;
+  --link-color: #3C4022;
+  --link-color-hover: #616837;
+  
+}
+
+
+/* FONTS */
+
+/* header font */
+.cherry-bomb-one-regular {
+  font-family: "Cherry Bomb One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+ header, h1, h2, h3, h4, h5 {
+  font-family: "Cherry Bomb One";
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+p {
+  font-family: "Lato", sans-serif;
+  margin-bottom: .75rem;
+}
+
+/* This is to offset some weird height stuff with eleventy img */
+img {
+  height: auto;
+}
+
+/* GLOBAL */
+
+
+body {
+  background-color: var(--bg-color);
+}
+
+/* link colors */
+a {
+  color: var(--link-color);
+}
+a:hover {
+  color: var(--link-color-hover);
+}
+
+/* HEADER */
+
+header {
+  /**
+   * For those unfamiliar with flexbox, check out this CSS Tricks article:
+   * https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+   */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--pg-width);
+  margin: 0 auto 0 auto;
+  background-color: var(--content-bg);
+  border-bottom: 1rem solid var(--border-color);
+}
+
+header nav {
+  background-color: var(--content-bg);
+  font-size:2rem;
+  width: var(--pg-width);
+  text-align: center;
+}
+
+header nav a {
+  text-decoration: none;
+}
+/* FOOTER */
+
+footer {
+  color: var(--footer);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  font-size: 12px;
+}
+
+footer p {
+  margin: auto;
+}
+
+footer a {
+  color: var(--footer);
+}
+/* COMIC */
+.comic h1 {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+/* style comic page image */
+#comicPage {
+  margin: 0 auto 0 auto;
+  width: var(--pg-width);
+  padding: 20px;
+}
+
+.double-page #comicPage {
+  width: var(--double-pg-width);
+}
+
+#comicPage img {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Don't remove this bit though */
+.paperDiv {
+  background: var(--content-bg);
+  position: relative;
+  width: var(--pg-width);
+  align-self: center;
+}
+
+/* PAPER TEAR BEGIN - start removing here if you don't want the paper effect */
+/*.paperDiv::before, .paperDiv::after {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 100%;
+  left: 0;
+  background: url(/img/papertear.svg) bottom;
+  background-size: var(--pg-width);
+}
+
+.paperDiv::before {
+  transform: scaleY(-1);
+  bottom: 100%;
+}
+
+.paperDiv::after {
+  top: 100%;
+}
+PAPER TEAR END - stop removing here */
+
+/* style nav button images */ 
+.comicNav {
+  margin: 0 auto 0 auto;
+  border-bottom: 1rem solid var(--border-color);
+  background-color: var(--content-bg);
+  width: var(--pg-width);
+  display: flex;
+  flex-wrap: nowrap;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+  gap: 10px;
+}
+.comicNav img {
+  width: 90px;
+}
+
+/* style author notes */
+.authorNotes {
+  margin: auto;
+  width: var(--pg-width);
+  font-size: 1.125rem;
+  padding: 1% 3% 3%;
+  border-bottom: 1rem solid var(--border-color);
+}
+
+.authorNotes h1 {
+  margin-bottom: 0;
+}
+
+.authorNotes-date {
+  color: var(--text-color);
+  font-size: 0.9rem;
+  margin-top: -5px;
+  margin-bottom: 1rem;
+}
+
+/* SUBPAGES */
+
+.subPage {
+  border-bottom: 1rem solid var(--border-color);
+  width: var(--pg-width);
+  max-width: 98%;
+  margin: 0 auto 0;
+  padding: 1rem 3rem 2rem;
+}
+
+/* gallery page - style borrowed from https://codepen.io/nabeelfaheem/pen/JjPLPOp */
+.gallery {
+    width: var(--double-pg-width);
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0 20px;
+}
+
+.gallery-image {
+    position: relative;
+    width: calc(33.33% - 10px);
+    padding: 0 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery-image:hover {
+    transform: scale(1.1);
+}
+
+.modal {
+    display: flex;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-content {
+   position:relative;
+    width: 90%;
+    height: 90%;
+    max-width: 900px;
+    padding-bottom: 10%;
+    padding-left: 10%;
+    max-height: 80%;
+    border-radius: 5px;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.message {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--content-bg);
+    color: var(--bg-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.close:hover {
+    transform: rotate(45deg);
+}
+
+@media screen and (max-width: 768px) {
+    .gallery-image {
+        width: calc(50% - 20px);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .gallery-image {
+        width: calc(100% - 20px);
+    }
+}
+
+/* character page */
+.character,
+.chapter-container {
+  /**
+   * For those unfamiliar with grid, check out this CSS Tricks article:
+   * https://css-tricks.com/snippets/css/complete-guide-grid/
+   *
+   * This is also being applied to the archive layout
+   */
+  display: grid;
+  grid-template-columns: 20% 60%;
+  gap: 1rem;
+  margin: 1rem auto 2rem;
+}
+
+.character h2 {
+  margin-bottom: 0;
+}
+
+.character h2 {
+  margin-bottom: 0;
+}
+
+.character picture,
+.character img {
+  width: 100%;
+  max-width: 150px;
+}
+
+/* archive */
+.archive-select {
+  width: min(400px, 98%);
+}
+
+.chapter {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+.chapter h3 {
+    margin: 0;
+    font-family: "Lato", sans-serif;
+}
+.chapter-img {
+  width: min(200px, 98%);
+}
+.chapter-container { 
+  grid-template-columns: 20% 60%;
+}
+
+/**
+  * MOBILE STYLES
+  * This basically says to apply these changes if the window screen is 700px or smaller
+  *
+**/
+@media screen and (max-width: 700px) {
+  .subPage {
+    padding: 1rem 1rem 2rem;
+  }
+
+  #comicPage {
+    padding: 20px 0;
+  }
+
+  .character,
+  .chapter-container {
+    grid-template-columns: 100%;
+    gap: 0rem;
+  }
+
+  :root {
+    --pg-width: min(100%);
+  }
+}
+
